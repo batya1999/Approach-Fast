@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 89
+  controlID: 43
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -68,8 +68,8 @@ MonoBehaviour:
     y: 0
     width: 272
     height: 722.8
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -373,9 +373,9 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: b2b80000
-    m_LastClickedID: 47282
-    m_ExpandedIDs: 00000000ea6c0000ec6c0000ee6c0000f06c0000f26c0000f46c0000f66c0000f86c0000b2b8000000ca9a3b
+    m_SelectedIDs: a06f0000
+    m_LastClickedID: 28576
+    m_ExpandedIDs: 00000000dc6d0000de6d0000e06d0000e26d0000e46d0000e66d0000e86d0000ea6d000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -403,7 +403,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000ea6c0000ec6c0000ee6c0000f06c0000f26c0000f46c0000f66c0000f86c0000
+    m_ExpandedIDs: 00000000dc6d0000de6d0000e06d0000e26d0000e46d0000e66d0000e86d0000ea6d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -430,7 +430,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000c8590000b46b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -545,23 +545,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: e8c30000
-      m_LastClickedID: 50152
-      m_ExpandedIDs: 0e39fdff743bfdff1a53fdff2653fdff6e54fdffa655fdffac56fdffb257fdffb858fdff385afdff445dfdff505dfdffae62fdffb062fdff2cfbffffca6b0000bcc30000
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: 20fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Gate
-        m_OriginalName: Gate
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -182002
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 4}
       m_SearchString: 
@@ -965,7 +965,7 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: 0.049153436, y: -0.90481293, z: 0.4071931, w: 0.11839984}
     speed: 2
-    m_Value: {x: 0.049130663, y: -0.90439373, z: 0.40700445, w: 0.11834499}
+    m_Value: {x: -0.049153436, y: 0.90481293, z: -0.40719306, w: -0.11839984}
   m_Size:
     m_Target: 7.7942286
     speed: 2
