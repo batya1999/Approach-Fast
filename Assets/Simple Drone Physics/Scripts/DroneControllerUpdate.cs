@@ -10,6 +10,7 @@ public class DroneControllerUpdate : MonoBehaviour
     public bool inCalibrationStartPitch = true;
     public bool inCalibrationPitch = false;
     public bool inCalibrationRoll = false;
+    public bool inCalibrationStartRoll = true;
     public bool inCalibrationThrottle = false;
     public bool inHover = true;
 
@@ -27,12 +28,14 @@ public class DroneControllerUpdate : MonoBehaviour
     [SerializeField] PIDController startPitchController;
     [SerializeField] PIDController throttleController;
     [SerializeField] PIDController rollController;
+    [SerializeField] PIDController startRollController;
 
     [Header("Drone Components")]
     [SerializeField] private GameObject target;
     [SerializeField] private GameObject body;
     private Rigidbody rb;
 
+    [SerializeField] private float zRot;
     [SerializeField] private float xRot;
     [SerializeField] private float yRot;
     [SerializeField] private Transform FL, FR, RL, RR;
@@ -40,10 +43,15 @@ public class DroneControllerUpdate : MonoBehaviour
     [SerializeField] private Camera targetCamera;
     [SerializeField] private float yaw = 0;
     [SerializeField] private float pitch = 0;
+    [SerializeField] private float roll = 0;
     [SerializeField] private int tps;
 
     [SerializeField] private Vector3 current;
     [SerializeField] private Quaternion rotationY, rotationX;
+
+
+    [SerializeField] private float curveErrorZ;
+    [SerializeField] private float curveErrorY;
 
 
     void Start()
@@ -73,6 +81,9 @@ public class DroneControllerUpdate : MonoBehaviour
 
         current = rotationX * (rotationY * transform.position);
 
+        curveErrorY = findCurveError(target.transform.position.x, target.transform.position.z, transform.position.x, transform.position.z);
+        curveErrorZ = findCurveError(target.transform.position.x, target.transform.position.y, transform.position.x, transform.position.y);
+
         //phi = Mathf.Atan2(target.transform.position.x, target.transform.position.z) * Mathf.Rad2Deg;
         //theta = Mathf.Atan2(transform.position.x, transform.position.z) * Mathf.Rad2Deg;
         // dessRot = phi - theta;
@@ -80,7 +91,7 @@ public class DroneControllerUpdate : MonoBehaviour
         //dessH = Mathf.Acos(target.transform.position.y / target.transform.position.magnitude) * Mathf.Rad2Deg;
         //H = Mathf.Acos(transform.position.y / transform.position.magnitude) * Mathf.Rad2Deg;
 
-        //zRot = transform.rotation.eulerAngles.z > 180 ? transform.rotation.eulerAngles.z - 360 : transform.rotation.eulerAngles.z;
+        zRot = transform.rotation.eulerAngles.z > 180 ? transform.rotation.eulerAngles.z - 360 : transform.rotation.eulerAngles.z;
         xRot = transform.rotation.eulerAngles.x > 180 ? transform.rotation.eulerAngles.x - 360 : transform.rotation.eulerAngles.x;
         yRot = transform.rotation.eulerAngles.y > 180 ? transform.rotation.eulerAngles.y - 360 : transform.rotation.eulerAngles.y;
         //throttleAmount = 200;
@@ -91,6 +102,7 @@ public class DroneControllerUpdate : MonoBehaviour
         if (inCalibrationStartPitch) CalibrateStartPitch();
         if (inCalibrationPitch) CalibratePitch();
         if (inCalibrationRoll) CalibrateRoll();
+        if (inCalibrationStartRoll) CalibrateRoll();
         if (inCalibrationThrottle) CalibrateThrottle();
         if (inHover) Hover();
     }
@@ -109,8 +121,11 @@ public class DroneControllerUpdate : MonoBehaviour
         if (inCalibrationRise) riseAmount = highController.Update(1.0f / tps, transform.localPosition.y, 1f);
         if (inCalibrationYaw) yawAmount = yawController.UpdateAngle(1.0f / tps, yRot, yaw);
         if (inCalibrationStartPitch) pitchAmount = startPitchController.UpdateAngle(1.0f / tps, xRot, pitch);
-        if (inCalibrationPitch) pitchAmount = pitchController.UpdateAngle(1.0f / tps, current.z, 0);
-        if (inCalibrationRoll) rollAmount = rollController.Update(1.0f / tps, current.x, 0);
+        //if (inCalibrationPitch) pitchAmount = pitchController.UpdateAngle(1.0f / tps, current.z, 0);
+        if (inCalibrationPitch) pitchAmount = pitchController.UpdateAngle(1.0f / tps, -curveErrorZ, 0);
+        //if (inCalibrationRoll) rollAmount = rollController.Update(1.0f / tps, current.x, 0);
+        if (inCalibrationRoll) rollAmount = rollController.Update(1.0f / tps, -curveErrorY, 0);
+        if (inCalibrationStartRoll) rollAmount = rollController.Update(1.0f / tps, zRot, roll);
     }
 
     void CalibrateRise()
@@ -146,7 +161,8 @@ public class DroneControllerUpdate : MonoBehaviour
             inCalibrationRoll = true;
             //inCalibrationHight = true;
             inCalibrationStartPitch = false;
-            inCalibrationPitch = true;
+            inCalibrationStartRoll = false;
+            //inCalibrationPitch = true;
             inHover = false;
             inCalibrationRise = false;
             inCalibrationThrottle = true;
@@ -173,6 +189,16 @@ public class DroneControllerUpdate : MonoBehaviour
         Roll();
     }
 
+    public float findCurveError(float a, float b, float x, float y)
+    {
+        float p1x = a + Mathf.Sqrt((a * a) - (b * b));
+        float p2x = a - Mathf.Sqrt((a * a) - (b * b));
+
+        float dist1 = Mathf.Sqrt(((p1x-x) * (p1x-x)) + (y * y));
+        float dist2 = Mathf.Sqrt(((p2x-x) * (p2x-x)) + (y * y));
+        
+        return dist1+dist2 - (2*a);
+    }
 
     void Hover()
     {
