@@ -14,8 +14,8 @@ public class curveRenderer : MonoBehaviour
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.startWidth = 5f;
-        lineRenderer.endWidth = 5f;
+        lineRenderer.startWidth = 0.5f;
+        lineRenderer.endWidth = 0.5f;
 
         int positionCount = lineRenderer.positionCount;
 

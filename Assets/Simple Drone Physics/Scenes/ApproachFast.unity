@@ -667,7 +667,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &96608886
 Transform:
   m_ObjectHideFlags: 0
@@ -825,7 +825,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
@@ -925,8 +925,8 @@ MonoBehaviour:
     derivativeInitialized: 0
   rollController:
     proportionalGain: 0.004
-    integralGain: 0
-    derivativeGain: 0.1
+    integralGain: 0.03
+    derivativeGain: 0.03
     outputMin: -20
     outputMax: 20
     integralSaturation: 0
@@ -961,8 +961,8 @@ MonoBehaviour:
   CenterOfMass: {x: 0, y: 2, z: 0}
   targetCamera: {fileID: 200394089}
   yaw: 0
-  pitch: 50
-  roll: 0
+  pitch: 36
+  roll: 58
   tps: 4
   current: {x: 0, y: 0, z: 0}
   rotationY: {x: 0, y: 0, z: 0, w: 0}
@@ -1249,7 +1249,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &200561638
 Transform:
   m_ObjectHideFlags: 0
@@ -1407,7 +1407,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
@@ -1507,8 +1507,8 @@ MonoBehaviour:
     derivativeInitialized: 0
   rollController:
     proportionalGain: 0.004
-    integralGain: 0
-    derivativeGain: 0.04
+    integralGain: 0.03
+    derivativeGain: 0.03
     outputMin: -20
     outputMax: 20
     integralSaturation: 0
@@ -1543,8 +1543,8 @@ MonoBehaviour:
   CenterOfMass: {x: 0, y: 2, z: 0}
   targetCamera: {fileID: 200394089}
   yaw: 0
-  pitch: 50
-  roll: 0
+  pitch: 36
+  roll: 58
   tps: 4
   current: {x: 0, y: 0, z: 0}
   rotationY: {x: 0, y: 0, z: 0, w: 0}
@@ -1942,7 +1942,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &378184480
 Transform:
   m_ObjectHideFlags: 0
@@ -2100,7 +2100,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
@@ -2200,8 +2200,8 @@ MonoBehaviour:
     derivativeInitialized: 0
   rollController:
     proportionalGain: 0.004
-    integralGain: 0
-    derivativeGain: 0.06
+    integralGain: 0.03
+    derivativeGain: 0.03
     outputMin: -20
     outputMax: 20
     integralSaturation: 0
@@ -2236,8 +2236,8 @@ MonoBehaviour:
   CenterOfMass: {x: 0, y: 2, z: 0}
   targetCamera: {fileID: 200394089}
   yaw: 0
-  pitch: 50
-  roll: 0
+  pitch: 36
+  roll: 58
   tps: 4
   current: {x: 0, y: 0, z: 0}
   rotationY: {x: 0, y: 0, z: 0, w: 0}
@@ -3225,6 +3225,111 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 658973750}
   m_Mesh: {fileID: -3781860745874542921, guid: ea1ea430d0cf09648b1d38177d48c5e8, type: 3}
+--- !u!1 &678363033
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 678363034}
+  - component: {fileID: 678363037}
+  - component: {fileID: 678363036}
+  - component: {fileID: 678363035}
+  m_Layer: 0
+  m_Name: Sphere
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &678363034
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678363033}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 120, y: 10, z: 90}
+  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1899809814}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &678363035
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678363033}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &678363036
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678363033}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &678363037
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678363033}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &680727423
 GameObject:
   m_ObjectHideFlags: 0
@@ -4286,7 +4391,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1293036547
 Transform:
   m_ObjectHideFlags: 0
@@ -4444,7 +4549,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
@@ -4544,8 +4649,8 @@ MonoBehaviour:
     derivativeInitialized: 0
   rollController:
     proportionalGain: 0.004
-    integralGain: 0
-    derivativeGain: 0.08
+    integralGain: 0.03
+    derivativeGain: 0.03
     outputMin: -20
     outputMax: 20
     integralSaturation: 0
@@ -4580,8 +4685,8 @@ MonoBehaviour:
   CenterOfMass: {x: 0, y: 2, z: 0}
   targetCamera: {fileID: 200394089}
   yaw: 0
-  pitch: 50
-  roll: 0
+  pitch: 36
+  roll: 58
   tps: 4
   current: {x: 0, y: 0, z: 0}
   rotationY: {x: 0, y: 0, z: 0, w: 0}
@@ -5777,7 +5882,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 543450653497147808}
   human: {fileID: 0}
-  distance: 8
+  distance: 20
   height: 1.37
   heightDamping: 5
   lookAtHeight: 0.9
@@ -7274,7 +7379,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1951475923
 Transform:
   m_ObjectHideFlags: 0
@@ -7432,7 +7537,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
@@ -7532,8 +7637,8 @@ MonoBehaviour:
     derivativeInitialized: 0
   rollController:
     proportionalGain: 0.004
-    integralGain: 0
-    derivativeGain: 0.02
+    integralGain: 0.03
+    derivativeGain: 0.03
     outputMin: -20
     outputMax: 20
     integralSaturation: 0
@@ -7568,8 +7673,8 @@ MonoBehaviour:
   CenterOfMass: {x: 0, y: 2, z: 0}
   targetCamera: {fileID: 200394089}
   yaw: 0
-  pitch: 50
-  roll: 15
+  pitch: 36
+  roll: 58
   tps: 4
   current: {x: 0, y: 0, z: 0}
   rotationY: {x: 0, y: 0, z: 0, w: 0}
@@ -8428,7 +8533,7 @@ Transform:
   m_GameObject: {fileID: 2103238631}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1200, y: 1000, z: 900}
+  m_LocalPosition: {x: 120, y: 10, z: 90}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8453,16 +8558,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inCalibrationRise: 1
-  inCalibrationYaw: 0
-  inCalibrationStartPitch: 1
+  inCalibrationYaw: 1
+  inCalibrationStartPitch: 0
   inCalibrationPitch: 0
   inCalibrationRoll: 0
-  inCalibrationStartRoll: 1
+  inCalibrationStartRoll: 0
   inCalibrationThrottle: 0
   inHover: 1
   yawAmount: 0
   pitchAmount: 0
-  throttleAmount: 50
+  throttleAmount: 25
   rollAmount: 0
   riseAmount: 0
   highController:
@@ -8532,8 +8637,8 @@ MonoBehaviour:
     derivativeInitialized: 0
   rollController:
     proportionalGain: 0.004
-    integralGain: 0
-    derivativeGain: 0.01
+    integralGain: 0.03
+    derivativeGain: 0.03
     outputMin: -20
     outputMax: 20
     integralSaturation: 0
@@ -8567,9 +8672,9 @@ MonoBehaviour:
   RR: {fileID: 1486528399}
   CenterOfMass: {x: 0, y: 2, z: 0}
   targetCamera: {fileID: 200394089}
-  yaw: 0
-  pitch: 50
-  roll: 0
+  yaw: 5
+  pitch: 60
+  roll: 70
   tps: 4
   current: {x: 0, y: 0, z: 0}
   rotationY: {x: 0, y: 0, z: 0, w: 0}
@@ -9089,6 +9194,11 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3999777085279818313, guid: 6efbea51cb4d0c94ab6d33e539eaa38d,
+        type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 4270390740855877405, guid: 6efbea51cb4d0c94ab6d33e539eaa38d,
         type: 3}
       propertyPath: m_TagString
@@ -9127,6 +9237,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2103238632}
+    - targetCorrespondingSourceObject: {fileID: 3999777084847947230, guid: 6efbea51cb4d0c94ab6d33e539eaa38d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 678363034}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3999777084847947231, guid: 6efbea51cb4d0c94ab6d33e539eaa38d,
         type: 3}

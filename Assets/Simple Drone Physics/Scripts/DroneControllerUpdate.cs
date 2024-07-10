@@ -158,10 +158,10 @@ public class DroneControllerUpdate : MonoBehaviour
         Pitch();
         if (pitch - xRot < 0.1f)
         {
-            inCalibrationRoll = true;
+            //inCalibrationRoll = true;
             //inCalibrationHight = true;
             inCalibrationStartPitch = false;
-            inCalibrationStartRoll = false;
+            //inCalibrationStartRoll = false;
             //inCalibrationPitch = true;
             inHover = false;
             inCalibrationRise = false;
@@ -187,6 +187,11 @@ public class DroneControllerUpdate : MonoBehaviour
     void CalibrateRoll()
     {
         Roll();
+        if (roll - zRot < 0.1f)
+        {
+            inCalibrationRoll = true;
+            inCalibrationStartRoll = false;
+        }
     }
 
     public float findCurveError(float a, float b, float x, float y)
