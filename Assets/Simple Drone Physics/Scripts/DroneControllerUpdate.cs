@@ -21,6 +21,13 @@ public class DroneControllerUpdate : MonoBehaviour
     [SerializeField] private float rollAmount;
     [SerializeField] private float riseAmount;
 
+    [Header("Control Max")]
+    [SerializeField] private float yawMax;
+    [SerializeField] private float pitchMax;
+    [SerializeField] private float throttleMax;
+    [SerializeField] private float rollMax;
+    [SerializeField] private float riseMax;
+
     [Header("Control Parameters")]
     [SerializeField] PIDController highController;
     [SerializeField] PIDController yawController;
@@ -35,18 +42,24 @@ public class DroneControllerUpdate : MonoBehaviour
     [SerializeField] private GameObject body;
     private Rigidbody rb;
 
-    [SerializeField] private float zRot;
-    [SerializeField] private float xRot;
-    [SerializeField] private float yRot;
+    //[SerializeField] 
+    private float zRot;
+    //[SerializeField] 
+    private float xRot;
+    //[SerializeField] 
+    private float yRot;
     [SerializeField] private Transform FL, FR, RL, RR;
-    [SerializeField] private Vector3 CenterOfMass;
-    [SerializeField] private Camera targetCamera;
+    //[SerializeField] 
+    private Vector3 CenterOfMass = new Vector3(0,2,0);
+    //[SerializeField]
+    //private Camera targetCamera;
     [SerializeField] private float yaw = 0;
     [SerializeField] private float pitch = 0;
     [SerializeField] private float roll = 0;
+    [SerializeField] private float rise = 0;
     [SerializeField] private int tps;
 
-    [SerializeField] private Vector3 current;
+    //[SerializeField] private Vector3 current;
     [SerializeField] private Quaternion rotationY, rotationX;
 
 
@@ -59,17 +72,17 @@ public class DroneControllerUpdate : MonoBehaviour
         Vector3 tarPos = target.transform.localPosition;
         rb = GetComponent<Rigidbody>();
         yaw = (float)Mathf.Atan2(tarPos.x, tarPos.z) * Mathf.Rad2Deg;
-        targetCamera.transform.LookAt(tarPos);
+        //targetCamera.transform.LookAt(tarPos);
 
-        float angleY = Mathf.Atan2(tarPos.z, tarPos.x) * Mathf.Rad2Deg;
-        rotationY = Quaternion.Euler(0, angleY - 90, 0);
-        Vector3 newTarget = rotationY * tarPos;
+        //float angleY = Mathf.Atan2(tarPos.z, tarPos.x) * Mathf.Rad2Deg;
+        //rotationY = Quaternion.Euler(0, angleY - 90, 0);
+        //Vector3 newTarget = rotationY * tarPos;
 
-        float angleX = Mathf.Atan2(newTarget.z, newTarget.y) * Mathf.Rad2Deg;
-        rotationX = Quaternion.Euler(-angleX, 0, 0);
-        Vector3 finalTarget = rotationX * newTarget;
+        //float angleX = Mathf.Atan2(newTarget.z, newTarget.y) * Mathf.Rad2Deg;
+        //rotationX = Quaternion.Euler(-angleX, 0, 0);
+        //Vector3 finalTarget = rotationX * newTarget;
 
-        Debug.Log("Final target position: " + finalTarget);
+        //Debug.Log("Final target position: " + finalTarget);
 
         StartCoroutine(CallFunctionRepeatedly());
     }
@@ -79,7 +92,7 @@ public class DroneControllerUpdate : MonoBehaviour
         rb.centerOfMass = CenterOfMass;
 
 
-        current = rotationX * (rotationY * transform.position);
+        //current = rotationX * (rotationY * transform.position);
 
         curveErrorY = findCurveError(target.transform.position.x, target.transform.position.z, transform.position.x, transform.position.z);
         curveErrorZ = findCurveError(target.transform.position.x, target.transform.position.y, transform.position.x, transform.position.y);
@@ -118,25 +131,17 @@ public class DroneControllerUpdate : MonoBehaviour
 
     void UpdateParams()
     {
-        if (inCalibrationRise) riseAmount = highController.Update(1.0f / tps, transform.localPosition.y, 1f);
-        if (inCalibrationYaw) yawAmount = yawController.UpdateAngle(1.0f / tps, yRot, yaw);
-        if (inCalibrationStartPitch) pitchAmount = startPitchController.UpdateAngle(1.0f / tps, xRot, pitch);
-        //if (inCalibrationPitch) pitchAmount = pitchController.UpdateAngle(1.0f / tps, current.z, 0);
-        if (inCalibrationPitch) pitchAmount = pitchController.UpdateAngle(1.0f / tps, -curveErrorZ, 0);
-        //if (inCalibrationRoll) rollAmount = rollController.Update(1.0f / tps, current.x, 0);
-        if (inCalibrationRoll) rollAmount = rollController.Update(1.0f / tps, -curveErrorY, 0);
-        if (inCalibrationStartRoll) rollAmount = rollController.Update(1.0f / tps, zRot, roll);
+        if (inCalibrationRise) riseAmount = highController.Update(1.0f / tps, transform.localPosition.y, rise) * riseMax;
+        if (inCalibrationYaw) yawAmount = yawController.UpdateAngle(1.0f / tps, yRot, yaw) * yawMax;
+        if (inCalibrationStartPitch) pitchAmount = startPitchController.UpdateAngle(1.0f / tps, xRot, pitch) * pitchMax;
+        if (inCalibrationPitch) pitchAmount = pitchController.UpdateAngle(1.0f / tps, -curveErrorZ, 0) * pitchMax;
+        if (inCalibrationRoll) rollAmount = rollController.Update(1.0f / tps, -curveErrorY, 0) * rollMax;
+        if (inCalibrationStartRoll) rollAmount = rollController.Update(1.0f / tps, zRot, roll) * rollMax;
     }
 
     void CalibrateRise()
     {
         Rise();
-        //if (transform.position.y >= 1f)
-        //{
-        //    //inHover = true;
-        //    inCalibrationH = false;
-        //    inCalibrationYaw = true;
-        //}
     }
 
     void CalibrateYaw()
@@ -155,33 +160,24 @@ public class DroneControllerUpdate : MonoBehaviour
     }
     void CalibrateStartPitch()
     {
+        inHover = false;
+        throttleAmount = (rb.mass * 9.81f / 4) / Mathf.Cos(xRot * Mathf.Deg2Rad);
+        Throttle();
         Pitch();
         if (pitch - xRot < 0.1f)
         {
-            //inCalibrationRoll = true;
-            //inCalibrationHight = true;
-            inCalibrationStartPitch = false;
-            //inCalibrationStartRoll = false;
+            //inCalibrationStartPitch = false;
             //inCalibrationPitch = true;
-            inHover = false;
             inCalibrationRise = false;
-            inCalibrationThrottle = true;
+            //throttleAmount = 25;
+            //inCalibrationThrottle = true;
+            inCalibrationYaw = false;
         }
     }
 
     void CalibrateThrottle()
     {
         Throttle();
-        // if (dessH > H && liftSensitivity > 5)
-        // {
-        //     // Go down
-        //     liftSensitivity -= 0.1f;
-        // }
-        // if (dessH < H && liftSensitivity < 30)
-        // {
-        //     // Go up
-        //     liftSensitivity += 0.1f;
-        // }
     }
 
     void CalibrateRoll()
