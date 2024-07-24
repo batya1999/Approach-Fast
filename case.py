@@ -5,8 +5,8 @@ from shapely.geometry import Polygon
 class Case:
     def __init__(self, name, p1, p2, dist, pre_dist):
         self.name = name
-        self.path = self.get_parabola(p1, p2, dist, pre_dist)
-        self.dronePath = self.get_parabola((0, 0, 0), p2, dist, pre_dist)
+        self.path_array, self.path_poly = self.get_parabola(p1, p2, dist, pre_dist)
+        self.dronePath_array, self.dronePath_poly = self.get_parabola((0, 0, 0), p2, dist, pre_dist)
 
     def get_parabola(self, drone_pos, p2, dist, pre_dist):
         # Calculate vx and vy using the correct points
@@ -30,8 +30,15 @@ class Case:
 
         # Create and return the polygon
         poly = Polygon([(drone_pos[0], drone_pos[1]), (dist[0], dist[1]), (p2[0], p2[1])])
-        return poly
+        # Calculate 100 points along the polygon's boundary
+        boundary = poly.boundary
+        length = boundary.length
+        points = [boundary.interpolate(i / 100, normalized=True) for i in range(100)]
+
+        # Convert to an array of tuples
+        points_array = [(point.x, point.y) for point in points]
+        return points_array, poly
 
 
 # Example usage
-case = Case('Test Case', (0, 0, 0), (10, 10, 10), (15, 15, 15), 5)
+#case = Case('Test Case', (0, 0, 0), (10, 10, 10), (15, 15, 15), 5)

@@ -1,11 +1,11 @@
 import numpy as np
-import config
+from Config import Config
 
 class Errors():
     def __init__(self, config):
-        self.mu = config.mu
-        self.sigma = config.sigma
-        self.bias = config.bias
+        self.mu = config['mu']
+        self.sigma = config['sigma']
+        self.bias = config['bias']
 
     def get_value_with_error(self, val):
         value = np.random.normal(self.mu+self.bias, self.sigma)
@@ -13,7 +13,7 @@ class Errors():
 
 
 def main():
-    errors_instance = Errors(config)
+    errors_instance = Errors(Config)
     for i in range(10):
         print(errors_instance.get_value_with_error(val=1))
 

@@ -1,27 +1,39 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
 from scenario import Scenario
-import Config
+from Config import Config
+
 
 class Simulator:
     def __init__(self):
         config = Config().configData
         self.scenario = Scenario()
-        self.param = config.dx
+        self.param = config['dx']
+        self.points = self.scenario.dronePath
+
+        # Setup the plot
+        self.fig, self.ax = plt.subplots()
+        self.ax.set_xlim(-10, 10)
+        self.ax.set_ylim(-10, 10)
+        self.scatter = self.ax.scatter([], [])
 
     def main(self):
-        mode = 'Appearance mode'
-        while True:
-            if mode == 'Appearance mode':
-                new_point, mode = self.scenario()
-            elif mode == 'Repair mode':
-                new_point, mode = self.scenario()
-            else:  # Collision mode
-                new_point, mode = self.scenario()
-            self.draw(new_point)
+        for i in range(len(self.points)):
+            new_point = self.scenario.update(self.points[i])
+            self.points[i] = new_point
 
-    def draw(self, point):
-        pass
+        self.draw()
 
+    def draw(self):
+        self.scatter.set_offsets(self.points)
+        self.scatter.set_offsets(self.scenario.dronePath)
+        plt.draw()
+        plt.show()
 
 
 
-
+if __name__ == "__main__":
+    simulator = Simulator()
+    plt.ion()  # Turn on interactive mode for live plotting
+    simulator.main()
