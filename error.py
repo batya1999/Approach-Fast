@@ -3,9 +3,9 @@ from Config import Config
 
 class Errors():
     def __init__(self, config):
-        self.mu = config['mu']
-        self.sigma = config['sigma']
-        self.bias = config['bias']
+        self.mu = config.mu
+        self.sigma = config.sigma
+        self.bias = config.bias
 
     def get_value_with_error(self, val):
         value = np.random.normal(self.mu+self.bias, self.sigma)

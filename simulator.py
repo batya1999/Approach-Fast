@@ -7,10 +7,10 @@ from Config import Config
 
 class Simulator:
     def __init__(self):
-        config = Config().configData
-        self.scenario = Scenario()
-        self.param = config['dx']
-        self.points = self.scenario.dronePath
+        config = Config()
+        self.scenario = Scenario(config)
+        self.param = config.dx
+        #self.points = self.scenario.dronePath
 
         # Setup the plot
         self.fig, self.ax = plt.subplots()
@@ -19,17 +19,19 @@ class Simulator:
         self.scatter = self.ax.scatter([], [])
 
     def main(self):
-        for i in range(len(self.points)):
-            new_point = self.scenario.update(self.points[i])
-            self.points[i] = new_point
+        for i in range(len(self.scenario.dronePath)):
+            new_point = self.scenario.update(self.scenario.dronePath[i])
+            self.scenario.dronePath[i] = new_point
 
         self.draw()
 
     def draw(self):
-        self.scatter.set_offsets(self.points)
+        self.scatter.set_offsets(self.scenario.dronePath)
         self.scatter.set_offsets(self.scenario.dronePath)
         plt.draw()
         plt.show()
+        print()
+
 
 
 

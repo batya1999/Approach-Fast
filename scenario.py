@@ -2,16 +2,14 @@ import Config
 import error
 import case
 class Scenario:
-    def __init__(self):
-        config = Config.Config().configData
-        self.p1 = config['p1']
-        self.p2 = config['p2']
-        self.dis = config['dist']
+    def __init__(self, config):
+        self.config = config
         self.error = error.Errors(config)
-        self.realDronePoint = (0, 0, 0)
-        self.pre_dist = config['pre_dist']
+
         # case = Case('Test Case', (0, 0, 0), (10, 10, 10), (15, 15, 15), 5)
-        self.case = case.Case(config['case_name'], self.realDronePoint, self.p1, self.p2, self.pre_dist)
+
+
+        self.case = case.Case(self.config.missle_type, (0, 0, 0), self.config.hit_point, self.config.intercept_point, self.config.pre_dist)
         self.dronePath = self.case.dronePath_array
 
 
@@ -25,10 +23,19 @@ class Scenario:
         #pid_z = self.Pid(point_with_error[2])
         pid_x = self.Pid(point_with_error[0])
         pid_y = self.Pid(point_with_error[1])
-        return pid_x, pid_y #todo: add z
+        #return pid_x, pid_y #todo: add z
+        return old_point
 
 
 
     def Pid(self, x):
         #todo: add pid
         return x
+
+
+def main():
+    s = Scenario()
+
+
+if __name__ == '__main__':
+    main()
