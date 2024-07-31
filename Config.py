@@ -10,7 +10,7 @@ class Config:
         #self.get_row_number = random.randint(0, self.df.shape[0])
         self.get_row_number = 0
         self.row = self.df.loc[self.get_row_number]
-        print(self.row)
+        # print(self.row)
 
         self.hit_point = self.get_point(self.row['hit_point'])
         self.intercept_point = self.get_point(self.row['intercept_point'])
@@ -43,11 +43,11 @@ class Config:
 
         return (mystrin_x, mystrin_y, mystrin_z)
 
-
-def main():
-    c = Config()
-    # print(c.configData)
-
-
-if __name__ == '__main__':
-    main()
+#
+# def main():
+#     c = Config()
+#     # print(c.configData)
+#
+#
+# if __name__ == '__main__':
+#     main()

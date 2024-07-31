@@ -23,7 +23,7 @@ class Scenario:
         #pid_z = self.Pid(point_with_error[2])
         pid_x = self.Pid(point_with_error[0])
         pid_y = self.Pid(point_with_error[1])
-        #return pid_x, pid_y #todo: add z
+        # return pid_x, pid_y #todo: add z
         return old_point
 
 
@@ -32,10 +32,10 @@ class Scenario:
         #todo: add pid
         return x
 
-
-def main():
-    s = Scenario()
-
-
-if __name__ == '__main__':
-    main()
+#
+# def main():
+#     s = Scenario()
+#
+#
+# if __name__ == '__main__':
+#     main()

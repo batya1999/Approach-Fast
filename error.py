@@ -11,12 +11,12 @@ class Errors():
         value = np.random.normal(self.mu+self.bias, self.sigma)
         return val + value*val
 
-
-def main():
-    errors_instance = Errors(Config)
-    for i in range(10):
-        print(errors_instance.get_value_with_error(val=1))
-
-
-if __name__ == '__main__':
-    main()
+#
+# def main():
+#     errors_instance = Errors(Config)
+#     for i in range(10):
+#         print(errors_instance.get_value_with_error(val=1))
+#
+#
+# if __name__ == '__main__':
+#     main()

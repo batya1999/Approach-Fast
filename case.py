@@ -1,6 +1,9 @@
 import numpy as np
 from shapely.geometry import Polygon
 import Config
+import pandas as pd
+import matplotlib.pyplot as plt
+import utills
 
 class Case:
     def __init__(self, name, drone_pos, hit_point, intercept_point, pre_dist):
@@ -10,9 +13,9 @@ class Case:
 
     def get_parabola(self, drone_pos, hit_point, intercept_point, pre_dist):
         # Calculate vx and vy using the correct points
-        print(type(hit_point[0]), hit_point[0])
-        print(type(pre_dist), pre_dist)
-        print(type(intercept_point[0]), intercept_point[0])
+        # print(type(hit_point[0]), hit_point[0])
+        # print(type(pre_dist), pre_dist)
+        # print(type(intercept_point[0]), intercept_point[0])
         vx = hit_point[0] - pre_dist - intercept_point[0]
         vy = hit_point[1] - pre_dist - intercept_point[1]
 
@@ -27,7 +30,7 @@ class Case:
         # Solve for coefficients a, b, c
         coefficients = np.linalg.solve(A, b)
         a, b, c = coefficients
-
+        utills.plot_parbulah(a,b,c, int(drone_pos[0]),int(intercept_point[0]))
         # Print coefficients for debugging
         print(f"Coefficients = a: {a}, b: {b}, c: {c}")
 
@@ -43,10 +46,5 @@ class Case:
         return points_array, poly
 
 
-def main():
-    pass
-
-if __name__ == '__main__':
-    main()
 
 
